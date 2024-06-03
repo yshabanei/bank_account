@@ -3,22 +3,65 @@ from typing import Set
 
 
 class BankAccount:
-    all_account_numbers:Set[int] = set()
+    """
+    A class representing a bank account with a unique account number, a name, and a balance.
 
-    def __init__(self, name:str) -> None:
+    Attributes:
+        all_account_numbers (Set[int]): A set of all generated account numbers.
+        account_number (int): A unique account number for the bank account.
+        name (str): The name of the account holder.
+        balance (float): The current balance of the account.
+
+    Methods:
+        __init__(self, name: str) -> None: Initializes a new bank account with a unique account number and the given name.
+        display(self) -> None: Displays the current balance of the account.
+        deposit(self) -> None: Allows the user to deposit an amount into the account.
+        withdraw(self) -> None: Allows the user to withdraw an amount from the account.
+    """
+
+    all_account_numbers: Set[int] = set()
+
+    def __init__(self, name: str) -> None:
+        """
+        Initializes a new bank account with a unique account number and the given name.
+
+        Args:
+            name (str): The name of the account holder.
+
+        Returns:
+            None
+        """
         while True:
             an = randrange(10000, 100000)
             if an not in BankAccount.all_account_numbers:
                 BankAccount.all_account_numbers.add(an)
-                self.account_number:int = an
+                self.account_number: int = an
                 break
         self.name = name
-        self.balance:float = 0.0
+        self.balance: float = 0.0
 
-    def display(self):
+    def display(self) -> None:
+        """
+        Displays the current balance of the account.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         print(f"Hi, {self.name}\nYour current balance: {self.balance:.2f}")
 
-    def deposit(self):
+    def deposit(self) -> None:
+        """
+        Allows the user to deposit an amount into the account.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         print(40 * "_")
         try:
             amount = float(input("Please enter amount to deposit: "))
@@ -30,7 +73,16 @@ class BankAccount:
         except ValueError:
             print("Invalid amount entered. Please enter a numerical value.")
 
-    def withdraw(self):
+    def withdraw(self) -> None:
+        """
+        Allows the user to withdraw an amount from the account.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         print(40 * "_")
         try:
             amount = float(input("Please enter amount to withdraw: "))
@@ -44,32 +96,3 @@ class BankAccount:
             self.display()
         except ValueError:
             print("Invalid amount entered. Please enter a numerical value.")
-
-
-def main():
-    account1 = BankAccount("Reza")
-    print(40 * "_")
-    print(f"account_number: {account1.account_number}")
-    print(40 * "_")
-    account1.display()
-    while True:
-        choice = int(
-            input(
-                "Enter \n1 to see your balance,\n2 to deposit\n"
-                "3 to withdraw, \n4 to exit.\n\t\tyour choice: "
-            )
-        )
-        if choice == 1:
-            account1.display()
-        elif choice == 2:
-            account1.deposit()
-        elif choice == 3:
-            account1.withdraw()
-        elif choice == 4:
-            break
-        else:
-            print("Please enter a valid number")
-
-
-if __name__ == "__main__":
-    main()
